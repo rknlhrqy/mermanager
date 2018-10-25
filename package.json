@@ -1,0 +1,27 @@
+{
+  "name": "mermanager",
+  "version": "1.0.0",
+  "description": "Web App to manage Mermen in three locations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev-server": "nodemon index.js",
+    "debug-server": "nodemon --inspect-brk index.js",
+    "client": "npm run start --prefix client",
+    "both": "concurrently \"npm run dev-server\" \"npm run client\"",
+    "debug-both": "concurrently \"npm run debug-server\" \"npm run client\""
+  },
+  "author": "Kening Ren",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
