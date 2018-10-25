@@ -9,22 +9,35 @@ class AddMerman extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
+    this.state = {
+      name: '',
+      location: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async submitNew(e) {
+  handleChange(event) {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.submitNew(event, this.props);
+  }
+
+  async submitNew(e, props) {
     e.preventDefault();
     const name = e.target.name.value;
     const location = e.target.location.value;
     try {
       const response = await axios.post('/srv/new', {name, location});
-      console.log(response.data);
       if (response.status >= 200 && response.status < 300) {
-        /*
-        const { AddMerman } = this.props.mermenStore;
-        AddMerman(response.data);
-        */
-        console.log(this.props);
+        props.mermenStore.AddMerman(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -34,14 +47,16 @@ class AddMerman extends Component {
   render() {
     return(
       <div className="container">
-        <form onSubmit={this.submitNew}>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">
             Name: 
-            <input type="text" name="name"/>
+            <input type="text" name="name"
+              value={this.state.name} onChange={this.handleChange}/>
           </label>
           <label htmlFor="location">
             Location:
-            <input type="text" name="location"/>
+            <input type="text" name="location"
+              value={this.state.locaton} onChange={this.handleChange}/>
             {/*
             <select>
               <option value="" disabled selected>Choose your placee</option>

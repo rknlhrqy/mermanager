@@ -1,5 +1,12 @@
-import MermanStore from './MermanStore';
 import { observable, action } from 'mobx';
+
+class MermanStore {
+  constructor(value) {
+    this.id = value.id;
+    this.name = value.name;
+    this.locaation = value.locaation;
+  }
+}
 
 class MermenStore {
   @observable mermen = [];
