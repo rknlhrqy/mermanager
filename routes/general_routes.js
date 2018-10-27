@@ -1,3 +1,4 @@
+const { ObjectID } = require('mongodb');
 const { Merman } = require('../db/merman');
 
 module.exports = (app) => {
@@ -5,23 +6,19 @@ module.exports = (app) => {
   app.get('/srv/all', async (request, response) => {
     try {
       const mermen = await Merman.find();
-      console.log(mermen);
       response.send({mermen});
     } catch (error) {
       response.status(400).send(error);
     }
   });
-  
+
   app.post('/srv/new', async (request, response) => {
-    debugger;
     const merman = new Merman({
       name: request.body.name,
       location: request.body.location,
     });
-    console.log(merman);
     try {
       const doc = await merman.save();
-      console.log('#1', doc);
       response.send(doc);
     } catch (error) {
       response.status(400).send(error);

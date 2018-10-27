@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import axios from 'axios';
+import { PLACE } from '../config/config';
 
 
 @inject('mermenStore')
 @observer
 class AddMerman extends Component {
-
+    initState = {
+      name: '',
+      location: '',
+      mermanLocation: PLACE[0],
+    };
+ 
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      location: ''
-    };
+    this.state = this.initState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMermanLocationChange = this.handleMermanLocationChange.bind(this);
   }
 
   handleChange(event) {
@@ -28,6 +32,7 @@ class AddMerman extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.submitNew(event, this.props);
+    this.clearInput();
   }
 
   async submitNew(e, props) {
@@ -43,7 +48,15 @@ class AddMerman extends Component {
       console.log(error);
     }
   }
+  clearInput() {
+    this.setState(this.initState);
+  }
 
+  handleMermanLocationChange(event) {
+    this.setState({
+      mermanLocation: event.target.value,
+    });
+  }
   render() {
     return(
       <div className="container">
@@ -55,16 +68,13 @@ class AddMerman extends Component {
           </label>
           <label htmlFor="location">
             Location:
-            <input type="text" name="location"
-              value={this.state.locaton} onChange={this.handleChange}/>
-            {/*
-            <select>
-              <option value="" disabled selected>Choose your placee</option>
-              <option value="castle">Castle</option>
-              <option value="cave">Cave</option>
-              <option value="coral_reef">Coral Reef</option>
+            <select name="location" className="browser-default"
+              value={this.state.mermanLocation}
+              onChange={this.handleMermanLocationChange}>
+              {PLACE.map(each =>{
+                return <option key={each} value={each}>{each}</option>;
+              })}
             </select>
-            */}
           </label>
           <button type="submit" className="teal btn-flat right white-text">
             Add
@@ -74,6 +84,7 @@ class AddMerman extends Component {
       </div>
     );
   }
+
 }
 
 export default AddMerman;
