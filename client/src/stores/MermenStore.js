@@ -29,20 +29,31 @@ class MermenStore {
     this.mermen = this.mermen.filter(each => each.id !== id);
   }
 
+/*
+  This does not work!!!
   @action EditMerman(id, location) {
-    const [ merman ] = this.mermen.filter(each => each.id === id);
-    merman.location = location;
-    const index = this.mermen.indexOf(merman);
+    const index = this.mermen.findIndex(each => each.id === id);
     if (index !== -1) {
-      this.mermen[index] = merman;
+      this.mermen[index].location = location;
     }
   }
+*/
 
-
+  @action EditMerman(id, name, location) {
+    this.RemoveMerman(id);
+    this.AddMerman({_id: id, name, location});
+  }
 
   @computed get mermenResult() {
     return this.mermen;
   }
+
+  @computed get sortedMermenResult() {
+    return this.mermen.slice().sort((a, b) => {
+      return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    });
+  }
+
 }
 
 const mermenStore = new MermenStore();

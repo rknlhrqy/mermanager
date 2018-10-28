@@ -22,8 +22,6 @@ class ListMermen extends Component {
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleMermanLocationChange =
       this.handleMermanLocationChange.bind(this);
-    this.setMermanLocationToState =
-      this.setMermanLocationToState.bind(this);
   }
 
   handleEditClick(event) {
@@ -41,7 +39,7 @@ class ListMermen extends Component {
     try {
       const response = await axios.patch(`/srv/change/${id}`, { location });
       if (response.status >= 200 && response.status < 300) {
-        props.mermenStore.EditMerman(response.data.doc._id, response.data.doc.location);
+        props.mermenStore.EditMerman(response.data.doc._id, response.data.doc.name, response.data.doc.location);
       } else {
         console.log(response.status);
       }
@@ -81,11 +79,7 @@ class ListMermen extends Component {
     this.editMerman(event, this.props, event.target.value);
   }
 
-  setMermanLocationToState(location) {
-    this.setState({mermanLocation: location});
-    return location;
-  }
-
+/*
   renderLocation(merman) {
     if (this.state.showLocationSelection === true && merman.id === this.state.id)  {
       return(
@@ -101,13 +95,28 @@ class ListMermen extends Component {
       return null;
     }
   }
+*/
 
-  renderContent(place) {
-    // const mermen = this.props.mermenStore.mermenResult;
-    const { mermen } = this.props.mermenStore;
-    const mermenInOnePlace = mermen.filter(each => each.location === place);
+  renderLocation(merman) {
+    if (this.state.showLocationSelection === true && merman.id === this.state.id)  {
+      return(
+        <select name="location" className="browser-default"
+          value=""
+          onChange={this.handleMermanLocationChange}>
+          <option disabled value="">Select the place...</option>
+          {PLACE.map(each =>{
+            return <option key={each} value={each}>{each}</option>;
+          })}
+        </select>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  render() {
     return(
-      mermenInOnePlace.map(each => {
+      this.props.mermenStore.sortedMermenResult.filter(each => each.location === this.props.place).map(each => {
         return(
           <tr key={each.id} data-key={each.id} className="each_merman_tr">
           <td>
@@ -122,9 +131,7 @@ class ListMermen extends Component {
     ); 
   }
 
-  render() {
-    return this.renderContent(this.props.place);
-  }
+
 }
 
 export default ListMermen;

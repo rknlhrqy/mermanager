@@ -57,6 +57,7 @@ class AddMerman extends Component {
       mermanLocation: event.target.value,
     });
   }
+/*
   render() {
     return(
       <div className="container">
@@ -71,6 +72,7 @@ class AddMerman extends Component {
             <select name="location" className="browser-default"
               value={this.state.mermanLocation}
               onChange={this.handleMermanLocationChange}>
+              <option disabled value="">Select the place...</option>
               {PLACE.map(each =>{
                 return <option key={each} value={each}>{each}</option>;
               })}
@@ -84,6 +86,38 @@ class AddMerman extends Component {
       </div>
     );
   }
+*/
+  render() {
+    return(
+      <div className="container">
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="name">
+            Name: 
+            <input type="text" name="name"
+              value={this.state.name} onChange={this.handleChange}/>
+          </label>
+          <label htmlFor="location">
+            Location:
+            <select name="location" className="browser-default"
+              value={this.state.mermanLocation}
+              onChange={this.handleMermanLocationChange}>
+              <option disabled value="">Select the place...</option>
+              {PLACE.map(each =>{
+                return <option key={each} value={each}>{each}</option>;
+              })}
+            </select>
+          </label>
+          <button type="submit" className="teal btn-flat right white-text">
+            Add
+            <i className="material-icons right">done</i>
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+
+
 
 }
 

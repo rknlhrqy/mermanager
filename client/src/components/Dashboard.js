@@ -24,7 +24,7 @@ class Dashboard extends Component {
     }
   }
 
-  renderEach() {
+  renderContent() {
     return PLACE.map(place => {
       return(
         <table key={place} className="striped highlight">
@@ -46,7 +46,7 @@ class Dashboard extends Component {
   render() {
     return(
       <div className="container">
-        {this.renderEach()}
+        {this.renderContent()}
       </div>
     );
   }
