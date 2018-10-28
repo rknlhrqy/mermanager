@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const { ObjectID } = require('mongodb');
 const { Merman } = require('../db/merman');
 
@@ -27,13 +28,12 @@ module.exports = (app) => {
   
   app.patch('/srv/change/:my_id', async (request, response) => {
     const id = request.params.my_id;
-    let body = _.pick(request.body, ['name', 'location']);
+    let body = _.pick(request.body, ['location']);
   
     if (!ObjectID.isValid(id)) {
       response.status(404).send({error: `ID ${id} is not valid!`});
     } else {
       try {
-        console.log(body);
         const doc = await Merman.findOneAndUpdate(
           {_id: id},
           {$set: body},

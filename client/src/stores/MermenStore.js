@@ -29,6 +29,17 @@ class MermenStore {
     this.mermen = this.mermen.filter(each => each.id !== id);
   }
 
+  @action EditMerman(id, location) {
+    const [ merman ] = this.mermen.filter(each => each.id === id);
+    merman.location = location;
+    const index = this.mermen.indexOf(merman);
+    if (index !== -1) {
+      this.mermen[index] = merman;
+    }
+  }
+
+
+
   @computed get mermenResult() {
     return this.mermen;
   }

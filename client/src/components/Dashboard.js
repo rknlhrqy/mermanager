@@ -18,13 +18,12 @@ class Dashboard extends Component {
       const response = await axios.get('/srv/all');
       if (response.status >= 200 && response.status < 300) {
         this.props.mermenStore.FillMermen(response.data.mermen);
-        //console.log(response.data.mermen);
       }
     } catch (error) {
       console.log(error);
     }
   }
- 
+
   renderEach() {
     return PLACE.map(place => {
       return(

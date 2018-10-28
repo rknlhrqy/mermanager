@@ -1,5 +1,5 @@
 node_modules/
 .nvmrc
 package-lock.json
-
+.vscode/
 
