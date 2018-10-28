@@ -12,6 +12,7 @@
     "babel-loader": "8.0.4",
     "babel-plugin-named-asset-import": "^0.2.2",
     "babel-preset-react-app": "^5.0.4",
+    "babel-preset-mobx": "^2.0.0",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
@@ -113,8 +114,5 @@
       "react-app",
       "mobx"
     ]
-  },
-  "devDependencies": {
-    "babel-preset-mobx": "^2.0.0"
   }
 }
