@@ -1,5 +1,3 @@
-const _ = require('lodash');
-const methodOverride = require('method-override');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -11,12 +9,10 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoDbUri, { useNewUrlParser: true });
 
-// app.use(methodOverride('X-HTTP-Method-Override'));
-
 app.use(bodyParser.json());
 
 backEndRoute(app);
-/*
+
 if (process.env.NODE_ENV === 'production') {
   // Express Framework will serve up production assets
   // like the main.js and main.css files.
@@ -29,7 +25,6 @@ if (process.env.NODE_ENV === 'production') {
     response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-*/
 
 const PORT = process.env.PORT || 5000; 
 app.listen(PORT);

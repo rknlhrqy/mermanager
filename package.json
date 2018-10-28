@@ -10,13 +10,15 @@
     "debug-server": "nodemon --inspect-brk index.js",
     "client": "npm run start --prefix client",
     "both": "concurrently \"npm run dev-server\" \"npm run client\"",
-    "debug-both": "concurrently \"npm run debug-server\" \"npm run client\""
+    "debug-both": "concurrently \"npm run debug-server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && del-cli client/node_modules"
   },
   "author": "Kening Ren",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "del-cli": "^1.1.0",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "method-override": "^3.0.0",
