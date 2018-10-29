@@ -1,5 +1,5 @@
 # mermanager
-A Web app which manages the mermen in different places.
+A Web app which manages the mermen in different places. The user can add new merman with the name and one of the three places to live. The user can remove any merman or edit a merman to any other place.
 
 # detail
 The frond-end is developed using React and MobX.<br>
