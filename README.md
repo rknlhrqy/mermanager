@@ -10,3 +10,6 @@ It is deployed at https://mermanager.herokuapp.com/. Try it.
 
 # usage
 You can add a merman with a name and one of the three locations. You can remove the merman. And you can edit the merman's location and move the merman to a different location.
+
+# to run it
+Download it. Run ">npm install". Run ">npm run both".
